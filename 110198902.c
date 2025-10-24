@@ -2,6 +2,7 @@
 //no functions or arrays//
 #include <stdbool.h>
 
+#include <math.h>
 int main(void) {
     const char* DEVELOPER = "Tyler Freeman";
     const char* VERSION = "1";
@@ -49,8 +50,31 @@ int main(void) {
                         break;
                     case '/':
                         quotient = (float)num1 / (float)num2;
-                        printf("The quotient of %d and %d is %f\n", num1, num2, quotient);
+                        if (num2 == 0) {
+                            printf("Cannot divide by zero\n");
+                        }
+                        else {
+                            printf("The quotient of %d and %d is %f\n", num1, num2, quotient);
+                        }
                         break;
+                    case '%':
+                        sum = num1 % num2;
+                        printf("The remainder of %d and %d is %d\n", num1, num2, sum);
+                        break;
+                    case'P':
+                    case'p':
+                        sum = pow(num1, num2);
+                        printf("The power of %d and %d is %d\n", num1, num2, sum);
+                        break;
+                    case 'X':
+                    case 'x':
+                        sum = fmax(num1, num2);
+                        printf("The maximum of %d and %d is %d\n", num1, num2, sum);
+                    case 'I':
+                    case 'i':
+                        sum = fmin(num1, num2);
+                        printf("The minimum of %d and %d is %d\n", num1, num2, sum);
+
                     default:
                         printf("Invalid operator\n");
                 }
