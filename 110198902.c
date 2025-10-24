@@ -16,8 +16,8 @@ int main(void) {
     while(true) {
     //calc logic//
         char operation, choice;
-        int num1, num2, sum;
-        float quotient;
+        int num1, num2, result;
+        float floatResult;
         printf("Select one of the following operations:\n"
                "B) Binary Mathematical Operations, such as addition and subtraction.\n"
                "U) Unary Mathematical Operations, such as square root, and log.\n"
@@ -29,51 +29,53 @@ int main(void) {
         switch (choice) {
             case 'B':
             case 'b':
-                printf("Please enter the first number:\n ");
-                scanf("%d", &num1);
-                printf("Please enter the operator(+,-,*,/):\n");
-                scanf(" %c", &operation);
-                printf("Please enter the second number:\n ");
-                scanf("%d", &num2);
+
+                    printf("Please enter the first number:\n ");
+                    scanf("%d", &num1);
+                    printf("Please enter the operator(+,-,*,/):\n");
+                    scanf(" %c", &operation);
+                    printf("Please enter the second number:\n ");
+                    scanf("%d", &num2);
+
                 switch (operation) {
                     case '+':
-                        sum = num1 + num2;
-                        printf("The sum of %d and %d is %d\n", num1, num2, sum);
+                        result = num1 + num2;
+                        printf("The sum of %d and %d is %d\n", num1, num2, result);
                         break;
                     case '-':
-                        sum = num1 - num2;
-                        printf("The difference of %d and %d is %d\n", num1, num2, sum);
+                        result = num1 - num2;
+                        printf("The difference of %d and %d is %d\n", num1, num2, result);
                         break;
                     case '*':
-                        sum = num1 * num2;
-                        printf("The product of %d and %d is %d\n", num1, num2, sum);
+                        result = num1 * num2;
+                        printf("The product of %d and %d is %d\n", num1, num2, result);
                         break;
                     case '/':
-                        quotient = (float)num1 / (float)num2;
+                        floatResult = (float)num1 / (float)num2;
                         if (num2 == 0) {
                             printf("Cannot divide by zero\n");
                         }
                         else {
-                            printf("The quotient of %d and %d is %f\n", num1, num2, quotient);
+                            printf("The quotient of %d and %d is %f\n", num1, num2, floatResult);
                         }
                         break;
                     case '%':
-                        sum = num1 % num2;
-                        printf("The remainder of %d and %d is %d\n", num1, num2, sum);
+                        result = num1 % num2;
+                        printf("The remainder of %d and %d is %d\n", num1, num2, result);
                         break;
                     case'P':
                     case'p':
-                        sum = pow(num1, num2);
-                        printf("The power of %d and %d is %d\n", num1, num2, sum);
+                        result = pow(num1, num2);
+                        printf("The power of %d and %d is %d\n", num1, num2, result);
                         break;
                     case 'X':
                     case 'x':
-                        sum = fmax(num1, num2);
-                        printf("The maximum of %d and %d is %d\n", num1, num2, sum);
+                        result = fmax(num1, num2);
+                        printf("The maximum of %d and %d is %d\n", num1, num2, result);
                     case 'I':
                     case 'i':
-                        sum = fmin(num1, num2);
-                        printf("The minimum of %d and %d is %d\n", num1, num2, sum);
+                        result = fmin(num1, num2);
+                        printf("The minimum of %d and %d is %d\n", num1, num2, result);
 
                     default:
                         printf("Invalid operator\n");
@@ -81,7 +83,41 @@ int main(void) {
                 break;
             case 'U':
             case 'u':
-                printf("Unary Mathematical Operations\n");
+                printf("Please enter the number:\n ");
+                scanf("%d", &num1);
+                printf("Please enter the operator(sqrt,log):\n");
+                scanf(" %c", &operation);
+                switch (operation) {
+                    case 'S':
+                    case 's':
+                        floatResult = sqrt((float)num1);
+                        printf("The square root of %d is %f\n", num1, floatResult);
+                        break;
+                    case 'L':
+                    case 'l':
+                        floatResult = log((float)num1);
+                        printf("The log of %d is %f\n", num1, floatResult);
+                        break;
+                    case 'E':
+                    case 'e':
+                        floatResult = exp((float)num1);
+                        printf("The exponential of %d is %f\n", num1, floatResult);
+                        break;
+                    case 'c':
+                    case 'C':
+                        floatResult = ceil((float)num1);
+                        printf("The ceiling of %d is %f\n", num1, floatResult);
+                        break;
+                    case 'f':
+                    case 'F':
+                        floatResult = floor((float)num1);
+                        printf("The floor of %d is %f\n", num1, floatResult);
+                        break;
+                    default:
+                        printf("Invalid operator\n");
+                }
+
+
                 break;
             case 'A':
             case 'a':
