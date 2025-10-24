@@ -15,8 +15,8 @@ int main(void) {
     while(true) {
     //calc logic//
         char operation, choice;
-        int num1, num2;
-        float sum;
+        int num1, num2, sum;
+        float quotient;
         printf("Select one of the following operations:\n"
                "B) Binary Mathematical Operations, such as addition and subtraction.\n"
                "U) Unary Mathematical Operations, such as square root, and log.\n"
@@ -48,8 +48,8 @@ int main(void) {
                         printf("The product of %d and %d is %d\n", num1, num2, sum);
                         break;
                     case '/':
-                        sum = num1 / num2;
-                        printf("The quotient of %d and %d is %d\n", num1, num2, sum);
+                        quotient = (float)num1 / (float)num2;
+                        printf("The quotient of %d and %d is %f\n", num1, num2, quotient);
                         break;
                     default:
                         printf("Invalid operator\n");
