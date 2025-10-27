@@ -16,8 +16,9 @@ int main(void) {
     while(true) {
     //calc logic//
         char operation, choice;
-        int num1, num2, result;
+        int num1, num2, result, valid =0;
         float floatResult;
+        double a,b,c,d,e, value;
         printf("Select one of the following operations:\n"
                "B) Binary Mathematical Operations, such as addition and subtraction.\n"
                "U) Unary Mathematical Operations, such as square root, and log.\n"
@@ -29,14 +30,32 @@ int main(void) {
         switch (choice) {
             case 'B':
             case 'b':
+                while (!valid) {
+                    printf("Please enter the 1st integer: ");
 
-                    printf("Please enter the first number:\n ");
-                    scanf("%d", &num1);
+                    if (scanf("%d", &num1) == 1) {
+                        valid = 1;  // Successfully read a number
+                    } else {
+                        printf("Error: Invalid input. Please enter a valid number.\n");
+                    }
+
+                    while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                }
+                valid = 0;
                     printf("Please enter the operator(+,-,*,/):\n");
                     scanf(" %c", &operation);
-                    printf("Please enter the second number:\n ");
-                    scanf("%d", &num2);
+                while (!valid) {
+                    printf("Please enter the second integer: ");
 
+                    if (scanf("%d", &num2) == 1) {
+                        valid = 1;  // Successfully read a number
+                    } else {
+                        printf("Error: Invalid input. Please enter a valid number.\n");
+                    }
+
+                    while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                }
+                valid = 0;
                 switch (operation) {
                     case '+':
                         result = num1 + num2;
@@ -79,14 +98,25 @@ int main(void) {
 
                     default:
                         printf("Invalid operator\n");
+                        break;
                 }
                 break;
             case 'U':
             case 'u':
-                printf("Please enter the number:\n ");
-                scanf("%d", &num1);
                 printf("Please enter the operator(sqrt,log):\n");
                 scanf(" %c", &operation);
+                while (!valid) {
+                    printf("Please enter the value: ");
+
+                    if (scanf("%d", &num1) == 1) {
+                        valid = 1;  // Successfully read a number
+                    } else {
+                        printf("Error: Invalid input. Please enter a valid number.\n");
+                    }
+
+                    while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                }
+                valid = 0;
                 switch (operation) {
                     case 'S':
                     case 's':
@@ -115,18 +145,52 @@ int main(void) {
                         break;
                     default:
                         printf("Invalid operator\n");
+                        break;
                 }
-
-
                 break;
             case 'A':
             case 'a':
+
+
+
                 printf("Advances Mathematical Operations\n");
                 break;
             case 'V':
             case 'v':
-                printf("Define variables and assign them values.\n");
-                break;
+                printf("Define or change a variable (a-e)\n");
+                scanf(" %c", &operation);
+                while (!valid) {
+                    printf("Please enter the value: ");
+
+                    if (scanf("%lf", &value) == 1) {
+                        valid = 1;  // Successfully read a number
+                    } else {
+                        printf("Error: Invalid input. Please enter a valid number.\n");
+                    }
+
+                    while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                }
+                valid = 0;
+                switch (operation) {
+                    case 'A':
+                    case 'a':
+                        a = (float)value;
+                    case 'b':
+                    case 'B':
+                        b = (float)value;
+                    case 'c':
+                    case 'C':
+                        c = (float)value;
+                    case 'd':
+                    case 'D':
+                        d = (float)value;
+                    case 'e':
+                    case 'E':
+                        e = (float)value;
+                    default:
+                        printf("Invalid variable input\n");
+                        break;
+                }
             case 'E':
             case 'e':
                 printf("Exiting...\n");
