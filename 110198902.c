@@ -18,7 +18,7 @@ int main(void) {
         char operation, choice;
         int num1, num2, result, valid =0;
         float floatResult;
-        double a,b,c,d,e, value;
+        double a,b,c,d,e, value, n1, n2;
         printf("Select one of the following operations:\n"
                "B) Binary Mathematical Operations, such as addition and subtraction.\n"
                "U) Unary Mathematical Operations, such as square root, and log.\n"
@@ -150,10 +150,77 @@ int main(void) {
                 break;
             case 'A':
             case 'a':
+                printf("input choice(B,U,E): ");
+                scanf(" %c", &choice);
+                switch (choice) {
+                    case 'B':
+                    case 'b':
+                        printf("Please enter the first integer: ");
+                        scanf(" %lf", &n1);
+                        printf("please enter the operation(+, -, *, /): ");
+                        scanf(" %c", &operation);
+                        printf("Please enter the second integer: ");
+                        scanf(" %lf", &n2);
 
 
 
-                printf("Advances Mathematical Operations\n");
+                    case 'u':
+                    case 'U':
+                        printf("Please enter the operator(sqrt,log):\n");
+                        scanf(" %c", &operation);
+                        while (!valid) {
+                            printf("Please enter the value: ");
+
+                            if (scanf("%f", &n1) == 1) {
+                                valid = 1;  // Successfully read a number
+                            } else {
+                                printf("Error: Invalid input. Please enter a valid number.\n");
+                            }
+
+                            while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                        }
+                        valid = 0;
+                        switch (operation) {
+                            case 'S':
+                            case 's':
+                                floatResult = sqrt(n1);
+                                printf("The square root of %lf is %f\n", n1, floatResult);
+                                break;
+                            case 'L':
+                            case 'l':
+                                floatResult = log(n1);
+                                printf("The log of %lf is %f\n", n1, floatResult);
+                                break;
+                            case 'E':
+                            case 'e':
+                                floatResult = exp(n1);
+                                printf("The exponential of %lf is %f\n", n1, floatResult);
+                                break;
+                            case 'c':
+                            case 'C':
+                                floatResult = ceil(n1);
+                                printf("The ceiling of %lf is %f\n", n1, floatResult);
+                                break;
+                            case 'f':
+                            case 'F':
+                                floatResult = floor(n1);
+                                printf("The floor of %lf is %f\n", n1, floatResult);
+                                break;
+                            default:
+                                printf("Invalid operator\n");
+                                break;
+                        }
+                        break;
+
+
+                    case 'E':
+                    case 'e':
+                        printf("Exiting...");
+                        break;
+                }
+
+
+
                 break;
             case 'V':
             case 'v':
