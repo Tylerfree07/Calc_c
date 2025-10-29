@@ -15,7 +15,7 @@ int main(void) {
     printf("----------------------------------------\n\n");
     while(true) {
     //calc logic//
-        char operation, choice;
+        char operation, choice, var;
         int num1, num2, result, valid =0;
         float floatResult;
         double a,b,c,d,e, value, n1, n2;
@@ -91,10 +91,12 @@ int main(void) {
                     case 'x':
                         result = fmax(num1, num2);
                         printf("The maximum of %d and %d is %d\n", num1, num2, result);
+                        break;
                     case 'I':
                     case 'i':
                         result = fmin(num1, num2);
                         printf("The minimum of %d and %d is %d\n", num1, num2, result);
+                        break;
 
                     default:
                         printf("Invalid operator\n");
@@ -120,8 +122,12 @@ int main(void) {
                 switch (operation) {
                     case 'S':
                     case 's':
-                        floatResult = sqrt((float)num1);
-                        printf("The square root of %d is %f\n", num1, floatResult);
+                        if (num1 < 0) {
+                            printf("Error: Cannot take square root of negative number.\n");
+                        } else {
+                            floatResult = sqrt(num1);
+                            printf("The square root of %.2d is %.2lf\n", num1, floatResult);
+                        }
                         break;
                     case 'L':
                     case 'l':
@@ -155,12 +161,56 @@ int main(void) {
                 switch (choice) {
                     case 'B':
                     case 'b':
-                        printf("Please enter the first integer: ");
-                        scanf(" %lf", &n1);
+                        printf("Please enter the first number or variable (a-e): ");
+                         // Read first character
+                        if (scanf(" %c", &var) == 1) {
+                            // Check if it's a variable (a-e or A-E)
+                            if ((var >= 'a' && var <= 'e') || (var >= 'A' && var <= 'E')) {
+                                switch (var) {
+                                    case 'a': case 'A': n1 = a; break;
+                                    case 'b': case 'B': n1 = b; break;
+                                    case 'c': case 'C': n1 = c; break;
+                                    case 'd': case 'D': n1 = d; break;
+                                    case 'e': case 'E': n1 = e; break;
+                                }
+                            }
+                            else if ((var >= '0' && var <= '9') || var == '-' || var == '.') {
+                                // Not a variable → likely a number, so push back and read full number
+                                ungetc(var, stdin);
+                                scanf("%lf", &n1);
+                            }
+                            else {
+                                // Invalid variable
+                                printf("Error: '%c' is not a valid variable (use a-e or a number).\n", var);
+                                return 0; // or handle however you want (e.g., loop again)
+                            }
+                        }
                         printf("please enter the operation(+, -, *, /): ");
                         scanf(" %c", &operation);
-                        printf("Please enter the second integer: ");
-                        scanf(" %lf", &n2);
+                        printf("Please enter the second number or variable (a-e): ");
+                        if (scanf(" %c", &var) == 1) {
+                            // Check if it's a variable (a-e or A-E)
+                            if ((var >= 'a' && var <= 'e') || (var >= 'A' && var <= 'E')) {
+                                switch (var) {
+                                    case 'a': case 'A': n2 = a; break;
+                                    case 'b': case 'B': n2 = b; break;
+                                    case 'c': case 'C': n2 = c; break;
+                                    case 'd': case 'D': n2 = d; break;
+                                    case 'e': case 'E': n2 = e; break;
+                                    default: printf("Invalid variable\n"); break;
+                                }
+                            }
+                            else if ((var >= '0' && var <= '9') || var == '-' || var == '.') {
+                                // Not a variable → likely a number, so push back and read full number
+                                ungetc(var, stdin);
+                                scanf("%lf", &n1);
+                            }
+                            else {
+                                // Invalid variable
+                                printf("Error: '%c' is not a valid variable (use a-e or a number).\n", var);
+                                return 0; // or handle however you want (e.g., loop again)
+                            }
+                        }
                         switch (operation) {
                             case '+':
                                 floatResult = n1 +n2;
@@ -176,7 +226,7 @@ int main(void) {
                                 break;
                             case '/':
                                 floatResult = n1 / n2;
-                                if (num2 == 0) {
+                                if (n2 == 0) {
                                     printf("Cannot divide by zero\n");
                                 }
                                 else {
@@ -184,7 +234,7 @@ int main(void) {
                                 }
                                 break;
                             case '%':
-                                floatResult = n1 % n2;
+                                floatResult = (int)n1 % (int)n2;
                                 printf("%f %% %f = %f\n", n1, n2, floatResult);
                                 break;
                             case'P':
@@ -206,29 +256,42 @@ int main(void) {
                             default:
                                 printf("Invalid operator\n");
                         }
-
+                    break;
 
                     case 'u':
                     case 'U':
                         printf("Please enter the operator(sqrt,log):\n");
                         scanf(" %c", &operation);
-                        while (!valid) {
-                            printf("Please enter the value: ");
-
-                            if (scanf("%f", &n1) == 1) {
-                                valid = 1;  // Successfully read a number
-                            } else {
-                                printf("Error: Invalid input. Please enter a valid number.\n");
+                        printf("Please enter the first number or variable (a-e): ");
+                        // Read first character
+                        if (scanf(" %c", &var) == 1) {
+                            // Check if it's a variable (a-e or A-E)
+                            if ((var >= 'a' && var <= 'e') || (var >= 'A' && var <= 'E')) {
+                                switch (var) {
+                                    case 'a': case 'A': n1 = a; break;
+                                    case 'b': case 'B': n1 = b; break;
+                                    case 'c': case 'C': n1 = c; break;
+                                    case 'd': case 'D': n1 = d; break;
+                                    case 'e': case 'E': n1 = e; break;
+                                    default: printf("Invalid variable\n"); break;
+                                }
                             }
-
-                            while (getchar() != '\n');  // Clear buffer (newline + any extra chars)
+                            else {
+                                // Not a variable → put back first char and read a number
+                                ungetc(var, stdin);
+                                scanf("%lf", &n1);
+                            }
                         }
                         valid = 0;
                         switch (operation) {
                             case 'S':
                             case 's':
-                                floatResult = sqrt(n1);
-                                printf("The square root of %lf is %f\n", n1, floatResult);
+                                if (n1 < 0) {
+                                    printf("Error: Cannot take square root of negative number.\n");
+                                } else {
+                                    floatResult = sqrt(n1);
+                                    printf("The square root of %.2lf is %.2lf\n", n1, floatResult);
+                                }
                                 break;
                             case 'L':
                             case 'l':
@@ -286,22 +349,28 @@ int main(void) {
                     case 'A':
                     case 'a':
                         a = (float)value;
+                        break;
                     case 'b':
                     case 'B':
                         b = (float)value;
+                        break;
                     case 'c':
                     case 'C':
                         c = (float)value;
+                        break;
                     case 'd':
                     case 'D':
                         d = (float)value;
+                        break;
                     case 'e':
                     case 'E':
                         e = (float)value;
+                        break;
                     default:
                         printf("Invalid variable input\n");
                         break;
                 }
+                break;
             case 'E':
             case 'e':
                 printf("Exiting...\n");
