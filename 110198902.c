@@ -161,7 +161,51 @@ int main(void) {
                         scanf(" %c", &operation);
                         printf("Please enter the second integer: ");
                         scanf(" %lf", &n2);
+                        switch (operation) {
+                            case '+':
+                                floatResult = n1 +n2;
+                                printf("%f + %f = %f\n", n1, n2, floatResult);
+                                break;
+                            case '-':
+                                floatResult = n1 - n2;
+                                printf("%f - %f = %f\n", n1, n2, floatResult);
+                                break;
+                            case '*':
+                                floatResult = n1 * n2;
+                                printf("%f * %f = %f\n", n1, n2, floatResult);
+                                break;
+                            case '/':
+                                floatResult = n1 / n2;
+                                if (num2 == 0) {
+                                    printf("Cannot divide by zero\n");
+                                }
+                                else {
+                                    printf("%f / %f = %f\n", n1, n2, floatResult);
+                                }
+                                break;
+                            case '%':
+                                floatResult = n1 % n2;
+                                printf("%f %% %f = %f\n", n1, n2, floatResult);
+                                break;
+                            case'P':
+                            case'p':
+                                floatResult = pow(n1, n2);
+                                printf("The power of %f and %f is %f\n", n1, n2, floatResult);
+                                break;
+                            case 'X':
+                            case 'x':
+                                floatResult = fmax(n1, n2);
+                                printf("The maximum of %lf and %lf is %f", n1, n2, floatResult);
+                                break;
+                            case 'I':
+                            case 'i':
+                                floatResult = fmin(n1, n2);
+                                printf("The minimum of %lf and %lf is %f", n1, n2, floatResult);
+                                break;
 
+                            default:
+                                printf("Invalid operator\n");
+                        }
 
 
                     case 'u':
