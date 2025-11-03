@@ -19,7 +19,7 @@ int main(void) {
         char operation, choice, var;
         int num1, num2, result, valid = 0;
         float floatResult;
-        double a, b, c, d, e, value, n1, n2;
+        double a=0, b=0, c=0, d=0, e=0, value, n1, n2;
         printf("Select one of the following operations:\n"
             "B) Binary Mathematical Operations, such as addition and subtraction.\n"
             "U) Unary Mathematical Operations, such as square root, and log.\n"
@@ -33,13 +33,11 @@ int main(void) {
             case 'b':
                 while (!valid) {
                     printf("Please enter the 1st integer: ");
-
                     if (scanf("%d", &num1) == 1) {
                         valid = 1; // Successfully read a number
                     } else {
                         printf("Error: Invalid input. Please enter a valid number.\n");
                     }
-
                     while (getchar() != '\n'); // Clear buffer (newline + any extra chars)
                 }
                 valid = 0;
@@ -47,13 +45,11 @@ int main(void) {
                 scanf(" %c", &operation);
                 while (!valid) {
                     printf("Please enter the second integer: ");
-
                     if (scanf("%d", &num2) == 1) {
                         valid = 1; // Successfully read a number
                     } else {
                         printf("Error: Invalid input. Please enter a valid number.\n");
                     }
-
                     while (getchar() != '\n'); // Clear buffer (newline + any extra chars)
                 }
                 valid = 0;
@@ -71,10 +67,10 @@ int main(void) {
                         printf("The product of %d and %d is %d\n", num1, num2, result);
                         break;
                     case '/':
-                        floatResult = (float) num1 / (float) num2;
                         if (num2 == 0) {
                             printf("Cannot divide by zero\n");
                         } else {
+                            floatResult = (float) num1 / (float) num2;
                             printf("The quotient of %d and %d is %f\n", num1, num2, floatResult);
                         }
                         break;
@@ -97,7 +93,6 @@ int main(void) {
                         result = fmin(num1, num2);
                         printf("The minimum of %d and %d is %d\n", num1, num2, result);
                         break;
-
                     default:
                         printf("Invalid operator\n");
                         break;
@@ -162,7 +157,6 @@ int main(void) {
                     case 'B':
                     case 'b':
                         printf("Please enter the first number or variable (a-e): ");
-                        // Read first character
                         if (scanf(" %c", &var) == 1) {
                             // Check if it's a variable (a-e or A-E)
                             if ((var >= 'a' && var <= 'e') || (var >= 'A' && var <= 'E')) {
@@ -221,7 +215,7 @@ int main(void) {
                             } else if ((var >= '0' && var <= '9') || var == '-' || var == '.') {
                                 // Not a variable → likely a number, so push back and read full number
                                 ungetc(var, stdin);
-                                scanf("%lf", &n1);
+                                scanf("%lf", &n2);
                             } else {
                                 // Invalid variable
                                 printf("Error: '%c' is not a valid variable (use a-e or a number).\n", var);
@@ -242,11 +236,11 @@ int main(void) {
                                 printf("%f * %f = %f\n", n1, n2, floatResult);
                                 break;
                             case '/':
-                                floatResult = n1 / n2;
                                 if (n2 == 0) {
                                     printf("Cannot divide by zero\n");
                                 } else {
-                                    printf("%f / %f = %f\n", n1, n2, floatResult);
+                                    floatResult = n1/n2;
+                                    printf("The quotient of %d and %d is %f\n", num1, num2, floatResult);
                                 }
                                 break;
                             case '%':
